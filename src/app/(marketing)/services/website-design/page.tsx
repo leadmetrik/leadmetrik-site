@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { 
@@ -269,11 +269,55 @@ function FlipCard({ point, index }: { point: typeof painPoints[0]; index: number
 // Before/After Slider Component
 function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    handleMove(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    handleMove(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    handleMove(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    handleMove(e.touches[0].clientX);
+  };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden">
+    <div 
+      ref={containerRef}
+      className="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden cursor-ew-resize select-none"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleMouseUp}
+    >
       {/* Before (ugly site mockup) */}
-      <div className="absolute inset-0 bg-gray-300">
+      <div className="absolute inset-0 bg-gray-300 pointer-events-none">
         <div className="w-full h-full bg-gradient-to-b from-gray-200 to-gray-400 flex flex-col">
           <div className="bg-blue-900 p-3 flex gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -291,7 +335,7 @@ function BeforeAfterSlider() {
               />
               <div className="text-green-800 font-bold">CALL US: 555-1234</div>
               <div className="text-blue-600 text-sm mt-2 overflow-hidden">
-                <div className="animate-marquee whitespace-nowrap">
+                <div className="whitespace-nowrap">
                   Best prices! Click here! Best prices! Best prices! Click here!
                 </div>
               </div>
@@ -308,7 +352,7 @@ function BeforeAfterSlider() {
       
       {/* After (modern site) */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+        className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pointer-events-none"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <div className="w-full h-full flex flex-col">
@@ -342,23 +386,13 @@ function BeforeAfterSlider() {
       
       {/* Slider handle */}
       <div 
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-10 pointer-events-none"
+        className="absolute top-0 bottom-0 w-1 bg-white pointer-events-none z-10"
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
           <span className="text-gray-800">↔</span>
         </div>
       </div>
-      
-      {/* Slider input */}
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={sliderPosition}
-        onChange={(e) => setSliderPosition(Number(e.target.value))}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
-      />
     </div>
   );
 }
