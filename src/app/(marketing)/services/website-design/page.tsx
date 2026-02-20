@@ -3,42 +3,47 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { 
+  Frown, Smartphone, Clock, Search, TrendingDown, Lock,
+  TrendingUp, Briefcase, Tablet, Zap, Shield, Wrench,
+  CheckCircle, ArrowRight, ChevronDown
+} from 'lucide-react';
 
 // Pain point flip cards data
 const painPoints = [
   {
     problem: "Your website looks like it's from 2015",
-    icon: "😤",
+    icon: Frown,
     solution: "Modern, stunning design that makes competitors jealous",
     benefit: "First impressions that convert"
   },
   {
     problem: "Visitors leave because it's not mobile-friendly",
-    icon: "📱",
+    icon: Smartphone,
     solution: "Built mobile-first — perfect on every screen size",
     benefit: "Capture 60%+ of traffic on mobile"
   },
   {
     problem: "Takes forever to load",
-    icon: "🐌",
+    icon: Clock,
     solution: "Lightning-fast performance under 2 seconds",
     benefit: "Lower bounce rates, higher rankings"
   },
   {
     problem: "Nobody can find you on Google",
-    icon: "🔍",
+    icon: Search,
     solution: "SEO built into every page from day one",
     benefit: "Get found by people searching for you"
   },
   {
     problem: "Visitors browse but never contact you",
-    icon: "💸",
+    icon: TrendingDown,
     solution: "Conversion-optimized with clear calls to action",
     benefit: "Turn visitors into paying customers"
   },
   {
     problem: "You can't update it yourself",
-    icon: "🔐",
+    icon: Lock,
     solution: "Easy-to-use admin panel + training included",
     benefit: "Control your content, no developer needed"
   }
@@ -87,32 +92,32 @@ const processSteps = [
 // Benefits
 const benefits = [
   {
-    icon: "📈",
+    icon: TrendingUp,
     title: "More Leads While You Sleep",
     description: "Your website works 24/7, capturing leads and inquiries even at 3 AM."
   },
   {
-    icon: "💼",
+    icon: Briefcase,
     title: "Look As Professional As You Are",
     description: "Stop losing customers to competitors with better-looking sites."
   },
   {
-    icon: "📱",
+    icon: Tablet,
     title: "Perfect On Every Device",
     description: "Desktop, tablet, phone — your site looks incredible everywhere."
   },
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Loads In Under 2 Seconds",
     description: "Fast sites rank higher and convert better. We obsess over speed."
   },
   {
-    icon: "🔒",
+    icon: Shield,
     title: "Secure & Protected",
     description: "SSL, backups, malware protection — your site is locked down."
   },
   {
-    icon: "🛠️",
+    icon: Wrench,
     title: "We Handle Everything",
     description: "Domain, hosting, emails, maintenance — it's all included."
   }
@@ -213,6 +218,7 @@ const pricingTiers = [
 // Flip Card Component
 function FlipCard({ point, index }: { point: typeof painPoints[0]; index: number }) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const IconComponent = point.icon;
 
   return (
     <motion.div
@@ -236,9 +242,13 @@ function FlipCard({ point, index }: { point: typeof painPoints[0]; index: number
           className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-700"
           style={{ backfaceVisibility: "hidden" }}
         >
-          <span className="text-5xl mb-4">{point.icon}</span>
+          <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-4">
+            <IconComponent className="w-8 h-8 text-orange-400" />
+          </div>
           <p className="text-gray-300 text-lg">{point.problem}</p>
-          <span className="mt-4 text-orange-400 text-sm">Tap to see solution →</span>
+          <span className="mt-4 text-orange-400 text-sm flex items-center gap-1">
+            Tap to see solution <ArrowRight className="w-4 h-4" />
+          </span>
         </div>
         
         {/* Back */}
@@ -247,7 +257,9 @@ function FlipCard({ point, index }: { point: typeof painPoints[0]; index: number
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <p className="text-white font-semibold text-lg mb-3">{point.solution}</p>
-          <p className="text-orange-100 text-sm">✓ {point.benefit}</p>
+          <p className="text-orange-100 text-sm flex items-center gap-1">
+            <CheckCircle className="w-4 h-4" /> {point.benefit}
+          </p>
         </div>
       </motion.div>
     </motion.div>
@@ -270,7 +282,7 @@ function BeforeAfterSlider() {
           </div>
           <div className="flex-1 p-4">
             <div className="text-center">
-              <div className="text-purple-800 text-2xl font-serif mb-2">🌟 WELCOME TO OUR WEBSITE 🌟</div>
+              <div className="text-purple-800 text-2xl font-serif mb-2">WELCOME TO OUR WEBSITE</div>
               <div className="text-red-600 text-sm animate-pulse">*** UNDER CONSTRUCTION ***</div>
               <img 
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect fill='%23999' width='400' height='200'/%3E%3Ctext x='200' y='100' font-family='Comic Sans MS' font-size='24' text-anchor='middle' fill='%23333'%3E[Low Quality Image]%3C/text%3E%3C/svg%3E"
@@ -280,7 +292,7 @@ function BeforeAfterSlider() {
               <div className="text-green-800 font-bold">CALL US: 555-1234</div>
               <div className="text-blue-600 text-sm mt-2 overflow-hidden">
                 <div className="animate-marquee whitespace-nowrap">
-                  ★ Best prices! ★ Click here! ★ Best prices! ★ Best prices! ★ Click here! ★
+                  Best prices! Click here! Best prices! Best prices! Click here!
                 </div>
               </div>
             </div>
@@ -313,14 +325,14 @@ function BeforeAfterSlider() {
               <h2 className="text-3xl font-bold text-white mb-4">Grow Your Business With Confidence</h2>
               <p className="text-gray-400 mb-6">Professional solutions that drive real results.</p>
               <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold">
-                Get Started →
+                Get Started
               </button>
             </div>
           </div>
           <div className="flex justify-center gap-8 pb-4 text-sm text-gray-400">
-            <span>⭐ 5.0 Rating</span>
-            <span>📞 24/7 Support</span>
-            <span>✓ Trusted by 500+</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> 5.0 Rating</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> 24/7 Support</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> Trusted by 500+</span>
           </div>
         </div>
         <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
@@ -375,7 +387,7 @@ function ProcessTimeline() {
                     ? 'bg-green-500 text-white' 
                     : 'bg-gray-700 text-gray-400'
               }`}>
-                {index < activeStep ? '✓' : step.step}
+                {index < activeStep ? <CheckCircle className="w-6 h-6" /> : step.step}
               </div>
               <span className={`mt-2 text-sm transition-all ${
                 activeStep === index ? 'text-orange-400' : 'text-gray-500'
@@ -418,9 +430,7 @@ function ProcessTimeline() {
                 {processSteps[activeStep].description}
               </p>
               <span className="inline-flex items-center gap-2 text-orange-400 text-sm">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
+                <Clock className="w-4 h-4" />
                 {processSteps[activeStep].duration}
               </span>
             </div>
@@ -435,7 +445,7 @@ function ProcessTimeline() {
           disabled={activeStep === 0}
           className="px-4 py-2 bg-gray-700 rounded-lg disabled:opacity-50"
         >
-          ← Previous
+          Previous
         </button>
         <span className="text-gray-500">
           {activeStep + 1} / {processSteps.length}
@@ -445,7 +455,7 @@ function ProcessTimeline() {
           disabled={activeStep === processSteps.length - 1}
           className="px-4 py-2 bg-orange-500 rounded-lg disabled:opacity-50"
         >
-          Next →
+          Next
         </button>
       </div>
       
@@ -456,14 +466,14 @@ function ProcessTimeline() {
           disabled={activeStep === 0}
           className="px-6 py-2 bg-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-600 transition-colors"
         >
-          ← Previous Step
+          Previous Step
         </button>
         <button
           onClick={() => setActiveStep(Math.min(processSteps.length - 1, activeStep + 1))}
           disabled={activeStep === processSteps.length - 1}
           className="px-6 py-2 bg-orange-500 rounded-lg disabled:opacity-50 hover:bg-orange-400 transition-colors"
         >
-          Next Step →
+          Next Step
         </button>
       </div>
     </div>
@@ -628,7 +638,7 @@ function FAQAccordion() {
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
                 className="text-orange-400 shrink-0"
               >
-                ↓
+                <ChevronDown className="w-5 h-5" />
               </motion.span>
             </div>
             <AnimatePresence>
@@ -759,9 +769,7 @@ export default function WebsiteDesignPage() {
                 className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
               >
                 Get Your Free Website Audit
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 href="#pricing"
@@ -779,27 +787,19 @@ export default function WebsiteDesignPage() {
               className="flex flex-wrap justify-center gap-6 text-gray-500 text-sm"
             >
               <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="w-5 h-5 text-green-500" />
                 Las Vegas Based
               </span>
               <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="w-5 h-5 text-green-500" />
                 Mobile-First Design
               </span>
               <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="w-5 h-5 text-green-500" />
                 SEO Included
               </span>
               <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="w-5 h-5 text-green-500" />
                 2-Week Delivery
               </span>
             </motion.div>
@@ -885,26 +885,29 @@ export default function WebsiteDesignPage() {
           </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700 hover:border-orange-500/50 transition-all group"
-              >
-                <span className="text-4xl mb-4 block group-hover:scale-110 transition-transform">
-                  {benefit.icon}
-                </span>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-400">
-                  {benefit.description}
-                </p>
-              </motion.div>
-            ))}
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700 hover:border-orange-500/50 transition-all group"
+                >
+                  <div className="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <IconComponent className="w-7 h-7 text-orange-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400">
+                    {benefit.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -996,9 +999,7 @@ export default function WebsiteDesignPage() {
                 <ul className="space-y-3 mb-8">
                   {tier.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-2 text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
+                      <CheckCircle className="w-5 h-5 text-green-500 shrink-0" />
                       {feature}
                     </li>
                   ))}
@@ -1044,6 +1045,26 @@ export default function WebsiteDesignPage() {
         </div>
       </section>
 
+      {/* Pro Tip Section - Dark */}
+      <section className="py-12 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto bg-gradient-to-r from-orange-500/10 to-orange-600/5 rounded-2xl p-8 border border-orange-500/20">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center shrink-0">
+                <Tablet className="w-6 h-6 text-orange-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white mb-2">Pro Tip: Consider the Dress!</h3>
+                <p className="text-gray-400">
+                  Don't forget to factor in the width of your wedding dress when determining your wedding aisle width! 
+                  A ballgown or a dress with a long train will require more space than a simple sheath dress.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section - Dark Gradient */}
       <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
         {/* Background elements */}
@@ -1070,9 +1091,7 @@ export default function WebsiteDesignPage() {
               className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-bold text-lg px-10 py-5 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
             >
               Get Your Free Website Audit
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowRight className="w-6 h-6" />
             </Link>
             <p className="text-gray-500 text-sm mt-4">
               No obligation. No pressure. Just honest feedback.
