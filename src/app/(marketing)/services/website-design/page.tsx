@@ -242,22 +242,22 @@ function FlipCard({ point, index }: { point: typeof painPoints[0]; index: number
           className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-gray-700"
           style={{ backfaceVisibility: "hidden" }}
         >
-          <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-4">
-            <IconComponent className="w-8 h-8 text-orange-400" />
+          <div className="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mb-4">
+            <IconComponent className="w-8 h-8 text-brand-orange" />
           </div>
           <p className="text-gray-300 text-lg">{point.problem}</p>
-          <span className="mt-4 text-orange-400 text-sm flex items-center gap-1">
+          <span className="mt-4 text-brand-orange text-sm flex items-center gap-1">
             Tap to see solution <ArrowRight className="w-4 h-4" />
           </span>
         </div>
         
         {/* Back */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 flex flex-col items-center justify-center text-center"
+          className="absolute inset-0 bg-gradient-to-br from-brand-orange to-brand-orange-dark rounded-2xl p-6 flex flex-col items-center justify-center text-center"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <p className="text-white font-semibold text-lg mb-3">{point.solution}</p>
-          <p className="text-orange-100 text-sm flex items-center gap-1">
+          <p className="text-yellow-100 text-sm flex items-center gap-1">
             <CheckCircle className="w-4 h-4" /> {point.benefit}
           </p>
         </div>
@@ -313,7 +313,7 @@ function BeforeAfterSlider() {
       >
         <div className="w-full h-full flex flex-col">
           <div className="bg-gray-900/90 backdrop-blur p-4 flex justify-between items-center border-b border-gray-700">
-            <div className="text-orange-500 font-bold text-xl">YourBrand</div>
+            <div className="text-brand-orange font-bold text-xl">YourBrand</div>
             <div className="flex gap-6 text-gray-300 text-sm">
               <span>Services</span>
               <span>About</span>
@@ -324,15 +324,15 @@ function BeforeAfterSlider() {
             <div className="max-w-md">
               <h2 className="text-3xl font-bold text-white mb-4">Grow Your Business With Confidence</h2>
               <p className="text-gray-400 mb-6">Professional solutions that drive real results.</p>
-              <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold">
+              <button className="bg-brand-orange text-white px-6 py-3 rounded-lg font-semibold">
                 Get Started
               </button>
             </div>
           </div>
           <div className="flex justify-center gap-8 pb-4 text-sm text-gray-400">
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> 5.0 Rating</span>
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> 24/7 Support</span>
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-orange-400" /> Trusted by 500+</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> 5.0 Rating</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> 24/7 Support</span>
+            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> Trusted by 500+</span>
           </div>
         </div>
         <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
@@ -382,7 +382,7 @@ function ProcessTimeline() {
             >
               <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold transition-all ${
                 activeStep === index 
-                  ? 'bg-orange-500 text-white' 
+                  ? 'bg-brand-orange text-white' 
                   : index < activeStep 
                     ? 'bg-green-500 text-white' 
                     : 'bg-gray-700 text-gray-400'
@@ -390,7 +390,7 @@ function ProcessTimeline() {
                 {index < activeStep ? <CheckCircle className="w-6 h-6" /> : step.step}
               </div>
               <span className={`mt-2 text-sm transition-all ${
-                activeStep === index ? 'text-orange-400' : 'text-gray-500'
+                activeStep === index ? 'text-brand-orange' : 'text-gray-500'
               }`}>
                 {step.title}
               </span>
@@ -401,7 +401,7 @@ function ProcessTimeline() {
         {/* Progress bar */}
         <div className="h-1 bg-gray-700 rounded-full mb-8 relative">
           <motion.div 
-            className="h-full bg-orange-500 rounded-full"
+            className="h-full bg-brand-orange rounded-full"
             initial={{ width: '0%' }}
             animate={{ width: `${(activeStep / (processSteps.length - 1)) * 100}%` }}
             transition={{ duration: 0.3 }}
@@ -419,7 +419,7 @@ function ProcessTimeline() {
           className="bg-gray-800/50 rounded-2xl p-8 border border-gray-700"
         >
           <div className="flex items-start gap-6">
-            <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shrink-0">
+            <div className="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center text-2xl font-bold text-white shrink-0">
               {processSteps[activeStep].step}
             </div>
             <div>
@@ -429,7 +429,7 @@ function ProcessTimeline() {
               <p className="text-gray-400 text-lg mb-4">
                 {processSteps[activeStep].description}
               </p>
-              <span className="inline-flex items-center gap-2 text-orange-400 text-sm">
+              <span className="inline-flex items-center gap-2 text-brand-orange text-sm">
                 <Clock className="w-4 h-4" />
                 {processSteps[activeStep].duration}
               </span>
@@ -453,7 +453,7 @@ function ProcessTimeline() {
         <button
           onClick={() => setActiveStep(Math.min(processSteps.length - 1, activeStep + 1))}
           disabled={activeStep === processSteps.length - 1}
-          className="px-4 py-2 bg-orange-500 rounded-lg disabled:opacity-50"
+          className="px-4 py-2 bg-brand-orange rounded-lg disabled:opacity-50"
         >
           Next
         </button>
@@ -471,7 +471,7 @@ function ProcessTimeline() {
         <button
           onClick={() => setActiveStep(Math.min(processSteps.length - 1, activeStep + 1))}
           disabled={activeStep === processSteps.length - 1}
-          className="px-6 py-2 bg-orange-500 rounded-lg disabled:opacity-50 hover:bg-orange-400 transition-colors"
+          className="px-6 py-2 bg-brand-orange rounded-lg disabled:opacity-50 hover:bg-brand-orange transition-colors"
         >
           Next Step
         </button>
@@ -516,7 +516,7 @@ function ROICalculator() {
                 step="100"
                 value={visitors}
                 onChange={(e) => setVisitors(Number(e.target.value))}
-                className="w-full accent-orange-500"
+                className="w-full accent-yellow-500"
               />
               <div className="text-2xl font-bold text-white mt-1">
                 {visitors.toLocaleString()} visitors
@@ -534,7 +534,7 @@ function ROICalculator() {
                 step="0.5"
                 value={conversionRate}
                 onChange={(e) => setConversionRate(Number(e.target.value))}
-                className="w-full accent-orange-500"
+                className="w-full accent-yellow-500"
               />
               <div className="text-2xl font-bold text-white mt-1">
                 {conversionRate}%
@@ -552,7 +552,7 @@ function ROICalculator() {
                 step="100"
                 value={avgValue}
                 onChange={(e) => setAvgValue(Number(e.target.value))}
-                className="w-full accent-orange-500"
+                className="w-full accent-yellow-500"
               />
               <div className="text-2xl font-bold text-white mt-1">
                 ${avgValue.toLocaleString()}
@@ -591,16 +591,16 @@ function ROICalculator() {
           
           {/* The difference */}
           <motion.div 
-            className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6"
+            className="bg-gradient-to-r from-brand-orange to-brand-orange-dark rounded-2xl p-6"
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ repeat: Infinity, repeatType: "reverse", duration: 2 }}
           >
-            <div className="text-orange-100 text-sm font-semibold mb-2">YOU'RE LEAVING ON THE TABLE</div>
+            <div className="text-yellow-100 text-sm font-semibold mb-2">YOU'RE LEAVING ON THE TABLE</div>
             <div className="text-4xl font-bold text-white">
               ${monthlyGain.toLocaleString()}/mo
             </div>
-            <div className="text-orange-100 mt-1">
+            <div className="text-yellow-100 mt-1">
               That's <strong>${yearlyGain.toLocaleString()}</strong> per year
             </div>
           </motion.div>
@@ -630,13 +630,13 @@ function FAQAccordion() {
         >
           <button
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className="w-full text-left bg-gray-800/50 rounded-xl p-5 border border-gray-700 hover:border-orange-500/50 transition-all"
+            className="w-full text-left bg-gray-800/50 rounded-xl p-5 border border-gray-700 hover:border-brand-orange/50 transition-all"
           >
             <div className="flex justify-between items-center gap-4">
               <h3 className="font-semibold text-white text-lg">{faq.question}</h3>
               <motion.span
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
-                className="text-orange-400 shrink-0"
+                className="text-brand-orange shrink-0"
               >
                 <ChevronDown className="w-5 h-5" />
               </motion.span>
@@ -716,8 +716,8 @@ export default function WebsiteDesignPage() {
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-b from-gray-900 via-gray-900 to-gray-800 overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(249,115,22,0.1),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(249,115,22,0.05),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(245,166,35,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(245,166,35,0.05),transparent_50%)]" />
         </div>
         
         <div className="container mx-auto px-4 py-20 relative z-10">
@@ -727,10 +727,10 @@ export default function WebsiteDesignPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-full px-4 py-2 text-orange-400 text-sm mb-6">
+              <span className="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/20 rounded-full px-4 py-2 text-brand-orange text-sm mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                 </span>
                 Las Vegas Website Design Agency
               </span>
@@ -743,7 +743,7 @@ export default function WebsiteDesignPage() {
               className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
             >
               Websites That Actually{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-orange-dark">
                 Bring You Customers
               </span>
             </motion.h1>
@@ -766,7 +766,7 @@ export default function WebsiteDesignPage() {
             >
               <Link
                 href="/#contact"
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
+                className="inline-flex items-center justify-center gap-2 bg-brand-orange hover:bg-brand-orange text-white font-semibold px-8 py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-brand-orange/25"
               >
                 Get Your Free Website Audit
                 <ArrowRight className="w-5 h-5" />
@@ -814,7 +814,7 @@ export default function WebsiteDesignPage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-orange-500 rounded-full mt-2" />
+            <div className="w-1.5 h-3 bg-brand-orange rounded-full mt-2" />
           </div>
         </motion.div>
       </section>
@@ -833,7 +833,7 @@ export default function WebsiteDesignPage() {
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               These website problems are costing you customers every single day. 
-              <span className="text-orange-400"> Tap each card</span> to see how we fix it.
+              <span className="text-brand-orange"> Tap each card</span> to see how we fix it.
             </p>
           </motion.div>
           
@@ -894,10 +894,10 @@ export default function WebsiteDesignPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700 hover:border-orange-500/50 transition-all group"
+                  className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700 hover:border-brand-orange/50 transition-all group"
                 >
-                  <div className="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <IconComponent className="w-7 h-7 text-orange-400" />
+                  <div className="w-14 h-14 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <IconComponent className="w-7 h-7 text-brand-orange" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">
                     {benefit.title}
@@ -982,12 +982,12 @@ export default function WebsiteDesignPage() {
                 transition={{ delay: index * 0.1 }}
                 className={`relative rounded-2xl p-8 ${
                   tier.popular 
-                    ? 'bg-gradient-to-b from-orange-500/20 to-gray-800 border-2 border-orange-500' 
+                    ? 'bg-gradient-to-b from-brand-orange/20 to-gray-800 border-2 border-brand-orange' 
                     : 'bg-gray-800/50 border border-gray-700'
                 }`}
               >
                 {tier.popular && (
-                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-sm font-semibold px-4 py-1 rounded-full">
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-orange text-white text-sm font-semibold px-4 py-1 rounded-full">
                     Most Popular
                   </span>
                 )}
@@ -1008,7 +1008,7 @@ export default function WebsiteDesignPage() {
                   href="/#contact"
                   className={`block text-center py-3 rounded-xl font-semibold transition-all ${
                     tier.popular 
-                      ? 'bg-orange-500 hover:bg-orange-400 text-white' 
+                      ? 'bg-brand-orange hover:bg-brand-orange text-white' 
                       : 'bg-gray-700 hover:bg-gray-600 text-white'
                   }`}
                 >
@@ -1048,10 +1048,10 @@ export default function WebsiteDesignPage() {
       {/* Pro Tip Section - Dark */}
       <section className="py-12 bg-gray-900">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-orange-500/10 to-orange-600/5 rounded-2xl p-8 border border-orange-500/20">
+          <div className="max-w-3xl mx-auto bg-gradient-to-r from-brand-orange/10 to-brand-orange-dark/5 rounded-2xl p-8 border border-brand-orange/20">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center shrink-0">
-                <Tablet className="w-6 h-6 text-orange-400" />
+              <div className="w-12 h-12 bg-brand-orange/20 rounded-xl flex items-center justify-center shrink-0">
+                <Tablet className="w-6 h-6 text-brand-orange" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">Pro Tip: Consider the Dress!</h3>
@@ -1069,7 +1069,7 @@ export default function WebsiteDesignPage() {
       <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,166,35,0.1),transparent_70%)]" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -1088,7 +1088,7 @@ export default function WebsiteDesignPage() {
             </p>
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-bold text-lg px-10 py-5 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25"
+              className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange text-white font-bold text-lg px-10 py-5 rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-brand-orange/25"
             >
               Get Your Free Website Audit
               <ArrowRight className="w-6 h-6" />
