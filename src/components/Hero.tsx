@@ -72,37 +72,46 @@ export default function Hero() {
         >
           Las Vegas SEO &
           <br />
+          Marketing Agency
+        </motion.h1>
+        
+        {/* Animated tagline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-2xl sm:text-3xl font-semibold mb-6"
+        >
+          <span className="text-gray-400">Helping Local Businesses </span>
           <span className="relative inline-block">
             <motion.span
               key={wordIndex}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
+              exit={{ opacity: 0, y: -20 }}
               className="gradient-text"
             >
               {rotatingWords[wordIndex]}
             </motion.span>
           </span>
-          {' '}Marketing Agency
-        </motion.h1>
+        </motion.div>
 
         {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
         >
-          The Las Vegas marketing company that helps local businesses get found, get leads, and dominate Google. 
-          <span className="text-white font-medium"> Local SEO, Google Ads, websites & digital marketing </span>
-          — all done for you.
+          <span className="text-white font-medium">Local SEO, Google Ads, websites & digital marketing </span>
+          — all done for you by our Las Vegas marketing team.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
