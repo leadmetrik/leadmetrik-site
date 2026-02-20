@@ -200,7 +200,7 @@ const pricingTiers = [
     price: "$5,000+",
     description: "Full online store setup",
     features: [
-      "Unlimited pages",
+      "Up to 20 pages",
       "Product catalog",
       "Shopping cart",
       "Payment processing",
@@ -1019,7 +1019,7 @@ export default function WebsiteDesignPage() {
           </div>
           
           <p className="text-center text-gray-500 text-sm mt-8">
-            All prices are one-time. Hosting & maintenance available from $49/month.
+            All prices are one-time. Hosting & maintenance $97/month.
           </p>
         </div>
       </section>
