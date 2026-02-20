@@ -46,7 +46,7 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-gray-800">
         <Link href="/admin">
-          <Image src="/logo.jpg" alt="Lead Metrik" width={160} height={50} className="mx-auto" />
+          <Image src="/logo-white.png" alt="Lead Metrik" width={180} height={55} className="mx-auto" />
         </Link>
       </div>
 
@@ -101,7 +101,7 @@ export default function AdminSidebar() {
     <>
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#1A202C] border-b border-gray-800 flex items-center justify-between px-4 z-50">
-        <Image src="/logo.jpg" alt="Lead Metrik" width={120} height={40} />
+        <Image src="/logo-white.png" alt="Lead Metrik" width={140} height={45} />
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="p-2 text-gray-400 hover:text-white"
