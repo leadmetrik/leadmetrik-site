@@ -84,7 +84,7 @@ export default function Process() {
               {/* Card */}
               <div className="relative bg-brand-charcoal/50 rounded-2xl p-8 border border-gray-800 hover:border-brand-orange/50 transition-colors h-full group">
                 {/* Number */}
-                <div className="absolute -top-4 -left-2 text-6xl font-bold text-brand-orange/10 group-hover:text-brand-orange/20 transition-colors">
+                <div className="absolute -top-6 -left-4 text-7xl font-bold text-brand-orange/10 group-hover:text-brand-orange/20 transition-colors select-none pointer-events-none">
                   {step.number}
                 </div>
                 

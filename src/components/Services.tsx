@@ -50,7 +50,7 @@ const packages = [
       'Video production',
       'Email marketing automation',
       'Dedicated account manager',
-      'Weekly strategy calls',
+      'Monthly strategy calls',
     ],
     cta: 'Dominate Now',
     popular: false,
