@@ -72,7 +72,7 @@ export default function Process() {
         </motion.div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="relative grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
@@ -98,10 +98,10 @@ export default function Process() {
                 <p className="text-gray-400">{step.description}</p>
               </div>
 
-              {/* Arrow (hidden on last item and mobile) */}
+              {/* Arrow centered between cards */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-20">
-                  <svg className="w-8 h-8 text-brand-orange/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="hidden lg:flex absolute top-1/2 -right-6 transform translate-x-1/2 -translate-y-1/2 z-20 w-10 h-10 items-center justify-center rounded-full bg-brand-dark border border-gray-700">
+                  <svg className="w-5 h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>

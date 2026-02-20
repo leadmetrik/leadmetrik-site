@@ -105,9 +105,11 @@ export default function Stats() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center"
+              className="text-center flex flex-col items-center"
             >
-              <div className="text-brand-orange mb-3">{stat.icon}</div>
+              <div className="w-14 h-14 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange mb-4">
+                {stat.icon}
+              </div>
               <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
