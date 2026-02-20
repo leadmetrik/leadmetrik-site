@@ -350,35 +350,16 @@ function BeforeAfterSlider() {
         </div>
       </div>
       
-      {/* After (modern site) */}
+      {/* After (modern site - real mockup) */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <div className="w-full h-full flex flex-col">
-          <div className="bg-gray-900/90 backdrop-blur p-4 flex justify-between items-center border-b border-gray-700">
-            <div className="text-brand-orange font-bold text-xl">YourBrand</div>
-            <div className="flex gap-6 text-gray-300 text-sm">
-              <span>Services</span>
-              <span>About</span>
-              <span>Contact</span>
-            </div>
-          </div>
-          <div className="flex-1 p-8 flex items-center">
-            <div className="max-w-md">
-              <h2 className="text-3xl font-bold text-white mb-4">Grow Your Business With Confidence</h2>
-              <p className="text-gray-400 mb-6">Professional solutions that drive real results.</p>
-              <button className="bg-brand-orange text-white px-6 py-3 rounded-lg font-semibold">
-                Get Started
-              </button>
-            </div>
-          </div>
-          <div className="flex justify-center gap-8 pb-4 text-sm text-gray-400">
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> 5.0 Rating</span>
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> 24/7 Support</span>
-            <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4 text-brand-orange" /> Trusted by 500+</span>
-          </div>
-        </div>
+        <img 
+          src="/2026-02-20-leadmetrik-after-hero-v2.png"
+          alt="Modern professional website"
+          className="w-full h-full object-cover object-top"
+        />
         <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
           AFTER
         </div>
