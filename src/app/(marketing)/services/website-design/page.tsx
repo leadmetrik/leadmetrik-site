@@ -1045,26 +1045,6 @@ export default function WebsiteDesignPage() {
         </div>
       </section>
 
-      {/* Pro Tip Section - Dark */}
-      <section className="py-12 bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-brand-orange/10 to-brand-orange-dark/5 rounded-2xl p-8 border border-brand-orange/20">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-brand-orange/20 rounded-xl flex items-center justify-center shrink-0">
-                <Tablet className="w-6 h-6 text-brand-orange" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white mb-2">Pro Tip: Consider the Dress!</h3>
-                <p className="text-gray-400">
-                  Don't forget to factor in the width of your wedding dress when determining your wedding aisle width! 
-                  A ballgown or a dress with a long train will require more space than a simple sheath dress.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA Section - Dark Gradient */}
       <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
         {/* Background elements */}
