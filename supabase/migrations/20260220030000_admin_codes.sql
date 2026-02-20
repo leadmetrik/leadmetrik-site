@@ -16,7 +16,8 @@ CREATE INDEX IF NOT EXISTS idx_admin_codes_lookup ON admin_codes(email, code, us
 -- RLS policies (service role only)
 ALTER TABLE admin_codes ENABLE ROW LEVEL SECURITY;
 
--- Only service role can access this table
+-- Only service role can access this table (drop first to make idempotent)
+DROP POLICY IF EXISTS "Service role full access" ON admin_codes;
 CREATE POLICY "Service role full access" ON admin_codes
   FOR ALL
   USING (auth.role() = 'service_role')
@@ -31,6 +32,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS admin_codes_updated_at ON admin_codes;
 CREATE TRIGGER admin_codes_updated_at
   BEFORE UPDATE ON admin_codes
   FOR EACH ROW

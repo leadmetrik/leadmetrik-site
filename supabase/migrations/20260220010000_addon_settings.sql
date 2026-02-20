@@ -134,8 +134,11 @@ ON CONFLICT (industry) DO NOTHING;
 ALTER TABLE addon_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE industry_templates ENABLE ROW LEVEL SECURITY;
 
--- Allow public read for client-facing proposals
+-- Allow public read for client-facing proposals (drop first to make idempotent)
+DROP POLICY IF EXISTS "Public can read active addons" ON addon_settings;
 CREATE POLICY "Public can read active addons" ON addon_settings FOR SELECT USING (is_active = true);
+
+DROP POLICY IF EXISTS "Public can read templates" ON industry_templates;
 CREATE POLICY "Public can read templates" ON industry_templates FOR SELECT USING (true);
 
 -- Create updated_at trigger
@@ -147,5 +150,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS addon_settings_updated_at ON addon_settings;
 CREATE TRIGGER addon_settings_updated_at BEFORE UPDATE ON addon_settings FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+DROP TRIGGER IF EXISTS industry_templates_updated_at ON industry_templates;
 CREATE TRIGGER industry_templates_updated_at BEFORE UPDATE ON industry_templates FOR EACH ROW EXECUTE FUNCTION update_updated_at();

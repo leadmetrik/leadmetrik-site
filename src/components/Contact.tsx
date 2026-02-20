@@ -28,6 +28,7 @@ export default function Contact() {
       business_size: formData.get('business_size') as string,
       challenge: formData.get('challenge') as string,
       source: 'website',
+      lead_type: 'audit', // Free audit requests need a call first
     }
 
     try {
