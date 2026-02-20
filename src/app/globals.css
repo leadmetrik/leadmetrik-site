@@ -196,3 +196,143 @@ body {
 .signature-canvas.signing {
   border-color: #F5A623;
 }
+
+/* ========================= */
+/* MOBILE-FIRST PROPOSAL STYLES */
+/* ========================= */
+
+/* Safe area support for notched phones */
+.proposal-body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* App-like header with blur */
+.app-header {
+  @apply bg-white/90 backdrop-blur-lg border-b border-gray-200/50;
+  @apply sticky top-0 z-50;
+  padding-top: max(env(safe-area-inset-top), 0px);
+}
+
+/* Mobile-optimized card */
+.app-card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100;
+  @apply p-5 sm:p-6 md:p-8;
+}
+
+/* Touch-friendly button */
+.app-button {
+  @apply min-h-[48px] px-6 py-3;
+  @apply font-semibold rounded-xl;
+  @apply transition-all duration-200 ease-out;
+  @apply active:scale-[0.98] active:opacity-90;
+  @apply touch-manipulation;
+}
+
+.app-button-primary {
+  @apply min-h-[48px] px-6 py-3;
+  @apply bg-brand-orange text-white font-semibold rounded-xl;
+  @apply shadow-lg;
+  @apply transition-all duration-200 ease-out;
+  @apply hover:bg-orange-500 active:bg-orange-600;
+  @apply active:scale-[0.98] active:opacity-90;
+  @apply touch-manipulation;
+}
+
+.app-button-secondary {
+  @apply min-h-[48px] px-6 py-3;
+  @apply bg-brand-charcoal text-white font-semibold rounded-xl;
+  @apply transition-all duration-200 ease-out;
+  @apply hover:bg-gray-800 active:bg-gray-900;
+  @apply active:scale-[0.98];
+  @apply touch-manipulation;
+}
+
+/* Touch-friendly input - 16px font prevents zoom on iOS */
+.app-input {
+  @apply w-full px-4 py-3 min-h-[48px];
+  @apply text-base;
+  @apply border-2 border-gray-200 rounded-xl;
+  @apply bg-white text-gray-900;
+  @apply transition-all duration-200;
+  @apply focus:ring-2 focus:ring-brand-orange focus:border-brand-orange focus:outline-none;
+  @apply touch-manipulation;
+}
+
+/* Horizontal scrolling table wrapper for mobile */
+.table-scroll {
+  @apply overflow-x-auto -mx-5 px-5;
+  @apply sm:mx-0 sm:px-0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.table-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bottom safe area spacer */
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+}
+
+/* Responsive typography */
+.text-mobile-lg {
+  @apply text-2xl sm:text-3xl md:text-4xl;
+}
+
+.text-mobile-md {
+  @apply text-xl sm:text-2xl;
+}
+
+.text-mobile-sm {
+  @apply text-base sm:text-lg;
+}
+
+/* Animations for proposals */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
