@@ -73,7 +73,7 @@ export default function Industries() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="industries" className="py-24 bg-brand-charcoal relative overflow-hidden">
+    <section id="industries" className="py-24 bg-brand-dark relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-brand-orange/5 rounded-full blur-[150px]" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-brand-orange/5 rounded-full blur-[150px]" />

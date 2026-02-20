@@ -51,7 +51,7 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="results" className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="results" className="py-24 bg-brand-charcoal relative overflow-hidden">
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
