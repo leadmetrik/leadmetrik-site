@@ -7,20 +7,20 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Lead Metrik | Las Vegas Digital Marketing Agency',
-  description: 'We help local businesses dominate Google. SEO, Google Ads, websites, and social media — all done for you. Get your free audit today.',
-  keywords: 'las vegas digital marketing, local seo las vegas, google ads management, website design las vegas, social media marketing',
+  title: 'Las Vegas SEO & Marketing Agency | LeadMetrik',
+  description: 'Las Vegas SEO company & digital marketing agency. We help local businesses get found, get leads, and dominate their market. Free marketing audit →',
+  keywords: 'seo las vegas, las vegas seo, marketing agency las vegas, seo company las vegas, digital marketing las vegas, local seo las vegas, search engine optimization las vegas, las vegas marketing companies',
   openGraph: {
-    title: 'Lead Metrik | Las Vegas Digital Marketing Agency',
-    description: 'We help local businesses dominate Google. Get your free audit today.',
+    title: 'Las Vegas SEO & Marketing Agency | LeadMetrik',
+    description: 'Las Vegas SEO company & digital marketing agency. Get found. Get leads. Dominate your market.',
     type: 'website',
     locale: 'en_US',
-    siteName: 'Lead Metrik',
+    siteName: 'LeadMetrik',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lead Metrik | Las Vegas Digital Marketing Agency',
-    description: 'We help local businesses dominate Google. Get your free audit today.',
+    title: 'Las Vegas SEO & Marketing Agency | LeadMetrik',
+    description: 'Las Vegas SEO company & digital marketing agency. Get found. Get leads. Dominate your market.',
   },
   robots: {
     index: true,

@@ -60,7 +60,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/30 rounded-full px-4 py-2 mb-8"
         >
           <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse" />
-          <span className="text-brand-orange font-medium text-sm">Las Vegas Digital Marketing Agency</span>
+          <span className="text-brand-orange font-medium text-sm">SEO Company Las Vegas</span>
         </motion.div>
 
         {/* Main Headline */}
@@ -70,7 +70,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
         >
-          Help Your Business
+          Las Vegas SEO &
           <br />
           <span className="relative inline-block">
             <motion.span
@@ -83,7 +83,7 @@ export default function Hero() {
               {rotatingWords[wordIndex]}
             </motion.span>
           </span>
-          {' '}on Google
+          {' '}Marketing Agency
         </motion.h1>
 
         {/* Subheadline */}
@@ -93,8 +93,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
         >
-          We help local businesses get found, get leads, and get paid. 
-          <span className="text-white font-medium"> SEO, Google Ads, websites, and social media </span>
+          The Las Vegas marketing company that helps local businesses get found, get leads, and dominate Google. 
+          <span className="text-white font-medium"> Local SEO, Google Ads, websites & digital marketing </span>
           — all done for you.
         </motion.p>
 

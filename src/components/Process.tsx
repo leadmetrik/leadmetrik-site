@@ -61,13 +61,13 @@ export default function Process() {
           className="text-center mb-16"
         >
           <span className="text-brand-orange font-semibold text-sm uppercase tracking-wider">
-            How It Works
+            Our SEO Process
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-4 mb-6">
-            From Zero to Leads in 4 Steps
+            How Our Las Vegas SEO Agency Works
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            No complicated processes. We handle the heavy lifting so you can focus on what you do best.
+            No complicated processes. Our marketing agency handles the heavy lifting so you can focus on what you do best.
           </p>
         </motion.div>
 

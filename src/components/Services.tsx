@@ -72,14 +72,14 @@ export default function Services() {
           className="text-center mb-16"
         >
           <span className="text-brand-orange font-semibold text-sm uppercase tracking-wider">
-            Simple Pricing
+            SEO & Marketing Packages
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-4 mb-6">
-            Choose Your Growth Plan
+            Las Vegas SEO Services & Pricing
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            No confusing options. Pick a plan that matches your goals. 
-            All plans include dedicated support and real results.
+            Search engine optimization and digital marketing packages for Las Vegas businesses. 
+            No confusing options — pick a plan that matches your goals.
           </p>
         </motion.div>
 

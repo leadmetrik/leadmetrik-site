@@ -34,13 +34,13 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-brand-orange font-semibold text-sm uppercase tracking-wider">
-              Get Started Today
+              Free SEO Audit Las Vegas
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-4 mb-6">
-              Ready to Dominate Your Market?
+              Ready to Dominate Google?
             </h2>
             <p className="text-gray-400 text-lg mb-8">
-              Get a free audit of your online presence. We'll show you exactly 
+              Get a free SEO audit of your online presence. Our Las Vegas digital marketing team will show you exactly 
               what's working, what's not, and how to fix it.
             </p>
 
