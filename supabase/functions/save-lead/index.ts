@@ -87,29 +87,31 @@ serve(async (req) => {
       )
     }
 
+    // Shared tier data
+    const industryEmoji: Record<string, string> = {
+      'medical': '🏥',
+      'venue': '🎪',
+      'home-services': '🔧',
+      'small-business': '🏪',
+    }
+
+    const tierPrices: Record<string, number> = {
+      'starter': 500,
+      'growth': 1200,
+      'dominate': 2500,
+    }
+
+    const tierLabels: Record<string, string> = {
+      'starter': 'Starter',
+      'growth': 'Growth',
+      'dominate': 'Dominate',
+    }
+
     // Send Telegram notification to Mark
     const telegramBotToken = Deno.env.get('TELEGRAM_BOT_TOKEN')
     const telegramChatId = Deno.env.get('TELEGRAM_CHAT_ID')
 
     if (telegramBotToken && telegramChatId) {
-      const industryEmoji: Record<string, string> = {
-        'medical': '🏥',
-        'venue': '🎪',
-        'home-services': '🔧',
-        'small-business': '🏪',
-      }
-
-      const tierPrices: Record<string, number> = {
-        'starter': 500,
-        'growth': 1200,
-        'dominate': 2500,
-      }
-
-      const tierLabels: Record<string, string> = {
-        'starter': 'Starter',
-        'growth': 'Growth',
-        'dominate': 'Dominate',
-      }
 
       let message: string
       let buttons: Array<Array<{ text: string; callback_data?: string; url?: string }>>
