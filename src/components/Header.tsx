@@ -35,17 +35,14 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="group">
             <Image
               src="/logo.png"
               alt="Lead Metrik"
-              width={44}
-              height={44}
-              className="h-10 w-auto transition-transform group-hover:scale-105"
+              width={140}
+              height={48}
+              className="h-12 w-auto transition-transform group-hover:scale-105"
             />
-            <span className="text-xl font-bold text-white tracking-tight">
-              Lead<span className="text-brand-orange">Metrik</span>
-            </span>
           </Link>
 
           {/* Desktop Navigation */}

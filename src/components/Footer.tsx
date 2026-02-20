@@ -38,11 +38,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Lead Metrik"
-              width={150}
+              width={120}
               height={40}
-              className="h-8 w-auto mb-4"
+              className="h-10 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm mb-4">
               Your Las Vegas digital marketing partner. Helping local businesses dominate Google.
