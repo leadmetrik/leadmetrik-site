@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-project.supabase.co'
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://awtcqgoxpleitxatqeoh.supabase.co'
 
 export default function Contact() {
   const ref = useRef(null)
