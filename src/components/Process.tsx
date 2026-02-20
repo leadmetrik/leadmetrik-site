@@ -52,9 +52,6 @@ export default function Process() {
 
   return (
     <section id="results" className="py-24 bg-brand-dark relative overflow-hidden">
-      {/* Connecting line */}
-      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-0.5 bg-gradient-to-r from-transparent via-brand-orange/30 to-transparent" />
-
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
