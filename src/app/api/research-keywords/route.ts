@@ -6,9 +6,9 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-// DataForSEO credentials
-const DATAFORSEO_LOGIN = 'mark@leadmetrik.com'
-const DATAFORSEO_PASSWORD = '45_RZxn}yiJAdk5J)#?K'
+// DataForSEO credentials from env
+const DATAFORSEO_LOGIN = process.env.DATAFORSEO_LOGIN!
+const DATAFORSEO_PASSWORD = process.env.DATAFORSEO_PASSWORD!
 
 interface KeywordResult {
   keyword: string
@@ -53,6 +53,10 @@ function getSearchIntent(keyword: string): string {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!DATAFORSEO_LOGIN || !DATAFORSEO_PASSWORD) {
+      return NextResponse.json({ error: 'DataForSEO credentials not configured' }, { status: 500 })
+    }
+
     const { proposal_id, lead_id, seed_keywords, city, industry } = await request.json()
 
     if (!proposal_id && !lead_id) {
