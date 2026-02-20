@@ -85,7 +85,7 @@ export default function SettingsPage() {
 
   if (loading) {
     return (
-      <div className="max-w-4xl">
+      <div className="max-w-7xl">
         <div className="animate-pulse">
           <div className="h-8 bg-gray-800 rounded w-48 mb-4"></div>
           <div className="h-4 bg-gray-800 rounded w-64 mb-8"></div>
@@ -100,7 +100,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-7xl">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white flex items-center gap-3">

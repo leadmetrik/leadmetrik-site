@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
         <div className="bg-[#1A202C] rounded-2xl p-8 shadow-2xl border border-gray-800">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <Image src="/logo-white.jpg" alt="Lead Metrik" width={200} height={65} />
+            <Image src="/logo.png" alt="Lead Metrik" width={180} height={55} />
           </div>
 
           <h1 className="text-2xl font-bold text-white text-center mb-2">Admin Access</h1>
