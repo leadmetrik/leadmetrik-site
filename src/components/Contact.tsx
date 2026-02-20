@@ -3,21 +3,53 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://your-project.supabase.co'
+
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
     
-    // Simulate submission - connect to your backend later
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    const formData = new FormData(e.currentTarget)
     
-    setIsSubmitting(false)
-    setSubmitted(true)
+    const leadData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      website: formData.get('website') as string,
+      industry: formData.get('industry') as string,
+      business_size: formData.get('business_size') as string,
+      challenge: formData.get('challenge') as string,
+      source: 'website',
+    }
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/save-lead`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(leadData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form')
+      }
+
+      setSubmitted(true)
+    } catch (err) {
+      console.error('Form submission error:', err)
+      setError('Something went wrong. Please try again or call us directly.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -80,7 +112,7 @@ export default function Contact() {
                 </div>
               </a>
               <a
-                href="mailto:support@leadmetrik.com"
+                href="mailto:mark@leadmetrik.com"
                 className="flex items-center gap-3 text-gray-300 hover:text-brand-orange transition-colors"
               >
                 <div className="w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center">
@@ -90,7 +122,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Email us</p>
-                  <p className="font-semibold">support@leadmetrik.com</p>
+                  <p className="font-semibold">mark@leadmetrik.com</p>
                 </div>
               </a>
             </div>
@@ -111,12 +143,18 @@ export default function Contact() {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">We Got Your Request!</h3>
-                  <p className="text-gray-400">We'll be in touch within 24 hours to schedule your free audit.</p>
+                  <p className="text-gray-400">Check your email — we'll be in touch within 24 hours with your custom proposal.</p>
                 </div>
               ) : (
                 <>
                   <h3 className="text-2xl font-bold text-white mb-2">Get Your Free Audit</h3>
                   <p className="text-gray-400 mb-6">Fill out the form and we'll analyze your online presence.</p>
+                  
+                  {error && (
+                    <div className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                      {error}
+                    </div>
+                  )}
                   
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
@@ -126,6 +164,7 @@ export default function Contact() {
                         </label>
                         <input
                           type="text"
+                          name="name"
                           required
                           className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                           placeholder="John Smith"
@@ -137,6 +176,7 @@ export default function Contact() {
                         </label>
                         <input
                           type="tel"
+                          name="phone"
                           required
                           className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                           placeholder="(702) 555-0123"
@@ -150,6 +190,7 @@ export default function Contact() {
                       </label>
                       <input
                         type="email"
+                        name="email"
                         required
                         className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                         placeholder="john@yourbusiness.com"
@@ -162,9 +203,45 @@ export default function Contact() {
                       </label>
                       <input
                         type="url"
+                        name="website"
                         className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                         placeholder="https://yourbusiness.com"
                       />
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Industry *
+                        </label>
+                        <select
+                          name="industry"
+                          required
+                          className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-orange transition-colors"
+                        >
+                          <option value="">Select industry...</option>
+                          <option value="medical">Medical / Healthcare</option>
+                          <option value="venue">Event Venue / Hospitality</option>
+                          <option value="home-services">Home Services</option>
+                          <option value="small-business">Other Local Business</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                          Business Size *
+                        </label>
+                        <select
+                          name="business_size"
+                          required
+                          className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-orange transition-colors"
+                        >
+                          <option value="">Select size...</option>
+                          <option value="solo">Just me</option>
+                          <option value="small">2-10 employees</option>
+                          <option value="medium">11-50 employees</option>
+                          <option value="large">50+ employees</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
@@ -172,6 +249,7 @@ export default function Contact() {
                         What's your biggest marketing challenge?
                       </label>
                       <select
+                        name="challenge"
                         className="w-full px-4 py-3 bg-brand-charcoal/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-orange transition-colors"
                       >
                         <option value="">Select one...</option>
