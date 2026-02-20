@@ -18,6 +18,8 @@ interface Lead {
   industry: string
   business_size: string
   challenge: string | null
+  target_service: string | null
+  city: string | null
   status: string
   proposal_id: string | null
 }
@@ -28,6 +30,13 @@ interface Proposal {
   status: string
   setup_fee: number
   monthly_retainer: number
+  keyword_data: {
+    keywords: { keyword: string; volume: number; competition: string; cpc: number; intent: string }[]
+    total_volume: number
+    location: string
+    researched_at: string
+  } | null
+  keywords_researched_at: string | null
 }
 
 const industryEmoji: Record<string, string> = {
@@ -51,6 +60,7 @@ export default function AdminPage() {
   const [proposals, setProposals] = useState<Record<string, Proposal>>({})
   const [loading, setLoading] = useState(true)
   const [generating, setGenerating] = useState<string | null>(null)
+  const [researching, setResearching] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -122,6 +132,45 @@ export default function AdminPage() {
       setError(err instanceof Error ? err.message : 'Failed to generate proposal')
     } finally {
       setGenerating(null)
+    }
+  }
+
+  async function researchKeywords(lead: Lead) {
+    if (!lead.proposal_id) {
+      setError('Generate a proposal first before researching keywords')
+      return
+    }
+
+    setResearching(lead.id)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/research-keywords', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          proposal_id: lead.proposal_id,
+          industry: lead.industry,
+          seed_keywords: lead.target_service,
+          city: lead.city || 'Las Vegas',
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Keyword research failed')
+      }
+
+      // Refresh to show updated data
+      await fetchLeads()
+      
+      const totalVol = result.keyword_data?.total_volume || 0
+      alert(`✅ Keyword research complete!\n\nFound ${result.keyword_data?.keywords?.length || 0} keywords\nTotal volume: ${totalVol.toLocaleString()}/month`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Keyword research failed')
+    } finally {
+      setResearching(null)
     }
   }
 
@@ -250,23 +299,39 @@ export default function AdminPage() {
                       {formatDate(lead.created_at)}
                     </td>
                     <td className="p-4">
-                      {proposal ? (
-                        <a
-                          href={`/proposal/${proposal.slug}`}
-                          target="_blank"
-                          className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg text-sm hover:bg-green-500/30 transition-colors"
-                        >
-                          View Proposal →
-                        </a>
-                      ) : (
-                        <button
-                          onClick={() => generateProposal(lead.id)}
-                          disabled={generating === lead.id}
-                          className="px-4 py-2 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 rounded-lg text-sm font-medium transition-colors"
-                        >
-                          {generating === lead.id ? 'Generating...' : 'Generate Proposal'}
-                        </button>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {proposal ? (
+                          <>
+                            <a
+                              href={`/proposal/${proposal.slug}`}
+                              target="_blank"
+                              className="px-3 py-1.5 bg-green-500/20 text-green-400 rounded-lg text-sm hover:bg-green-500/30 transition-colors"
+                            >
+                              View →
+                            </a>
+                            <button
+                              onClick={() => researchKeywords(lead)}
+                              disabled={researching === lead.id}
+                              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                                proposal.keyword_data
+                                  ? 'bg-blue-500/20 text-blue-400 hover:bg-blue-500/30'
+                                  : 'bg-purple-500 hover:bg-purple-600 text-white'
+                              }`}
+                              title={proposal.keyword_data ? `Last researched: ${new Date(proposal.keywords_researched_at!).toLocaleDateString()}` : 'Run keyword research via DataForSEO'}
+                            >
+                              {researching === lead.id ? '🔄' : proposal.keyword_data ? '🔍 ✓' : '🔍 Research'}
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => generateProposal(lead.id)}
+                            disabled={generating === lead.id}
+                            className="px-4 py-2 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 rounded-lg text-sm font-medium transition-colors"
+                          >
+                            {generating === lead.id ? 'Generating...' : 'Generate Proposal'}
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 )

@@ -54,6 +54,12 @@ interface Proposal {
   custom_notes: string | null
   status: string
   expires_at: string | null
+  keyword_data: {
+    keywords: Keyword[]
+    total_volume: number
+    location: string
+    researched_at: string
+  } | null
 }
 
 const competitionColors: Record<string, string> = {
@@ -269,7 +275,9 @@ export default function DynamicProposalPage() {
     )
   }
 
-  const keywords = template?.target_keywords || []
+  // Prefer real keyword data from DataForSEO research, fallback to template
+  const keywords = proposal.keyword_data?.keywords || template?.target_keywords || []
+  const totalVolume = proposal.keyword_data?.total_volume || keywords.reduce((sum, kw) => sum + kw.volume, 0)
   const servicesSetup = template?.services_setup || []
   const servicesMonthly = template?.services_monthly || []
   const seoDeliverables = template?.seo_deliverables
@@ -281,11 +289,11 @@ export default function DynamicProposalPage() {
       <header className="app-header">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <Image
-            src="/logo.png"
+            src="/logo.jpg"
             alt="Lead Metrik"
-            width={140}
-            height={46}
-            className="h-8 sm:h-10 w-auto"
+            width={180}
+            height={60}
+            className="h-10 sm:h-12 w-auto"
             priority
           />
           <span className="text-xs text-gray-500 hidden sm:block">Proposal Date: {currentDate}</span>
@@ -384,11 +392,16 @@ export default function DynamicProposalPage() {
             
             <div className="mt-4 p-3 sm:p-4 bg-brand-orange/10 rounded-lg">
               <p className="text-sm text-brand-charcoal font-medium">
-                📊 Total addressable search volume: <span className="font-bold">~{keywords.reduce((sum, kw) => sum + kw.volume, 0).toLocaleString()} searches/month</span>
+                📊 Total addressable search volume: <span className="font-bold">~{totalVolume.toLocaleString()} searches/month</span>
               </p>
               <p className="text-xs text-gray-600 mt-1">
                 Even capturing 5-10% of this traffic = qualified leads every month
               </p>
+              {proposal.keyword_data && (
+                <p className="text-xs text-gray-500 mt-1 italic">
+                  Data from Google Ads API • {proposal.keyword_data.location} market
+                </p>
+              )}
             </div>
           </section>
         )}
