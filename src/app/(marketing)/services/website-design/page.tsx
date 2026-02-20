@@ -342,7 +342,7 @@ function BeforeAfterSlider() {
       
       {/* Slider handle */}
       <div 
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
+        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-10 pointer-events-none"
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
@@ -357,7 +357,7 @@ function BeforeAfterSlider() {
         max="100"
         value={sliderPosition}
         onChange={(e) => setSliderPosition(Number(e.target.value))}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize"
+        className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"
       />
     </div>
   );
