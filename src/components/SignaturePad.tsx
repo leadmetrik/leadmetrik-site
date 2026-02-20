@@ -4,10 +4,15 @@ import { useRef, useEffect, useState } from 'react'
 import SignaturePadLib from 'signature_pad'
 
 interface SignaturePadProps {
-  onSignatureChange: (dataUrl: string | null) => void
+  onSignatureChange?: (dataUrl: string | null) => void
+  onSave?: (dataUrl: string | null) => void
 }
 
-export default function SignaturePad({ onSignatureChange }: SignaturePadProps) {
+export default function SignaturePad({ onSignatureChange, onSave }: SignaturePadProps) {
+  const handleChange = (dataUrl: string | null) => {
+    onSignatureChange?.(dataUrl)
+    onSave?.(dataUrl)
+  }
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const signaturePadRef = useRef<SignaturePadLib | null>(null)
   const [isSigning, setIsSigning] = useState(false)
@@ -25,7 +30,7 @@ export default function SignaturePad({ onSignatureChange }: SignaturePadProps) {
 
       signaturePadRef.current.addEventListener('endStroke', () => {
         if (signaturePadRef.current && !signaturePadRef.current.isEmpty()) {
-          onSignatureChange(signaturePadRef.current.toDataURL())
+          handleChange(signaturePadRef.current.toDataURL())
         }
       })
 
@@ -49,12 +54,12 @@ export default function SignaturePad({ onSignatureChange }: SignaturePadProps) {
         signaturePadRef.current?.off()
       }
     }
-  }, [onSignatureChange])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const clearSignature = () => {
     signaturePadRef.current?.clear()
     setIsSigning(false)
-    onSignatureChange(null)
+    handleChange(null)
   }
 
   return (

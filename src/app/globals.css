@@ -183,3 +183,16 @@ body {
 .counter::after {
   content: counter(num);
 }
+
+/* Signature Pad */
+.signature-canvas {
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background: white;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.signature-canvas.signing {
+  border-color: #F5A623;
+}

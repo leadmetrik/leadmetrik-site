@@ -150,12 +150,26 @@ export default function AdminPage() {
             <h1 className="text-3xl font-bold">LeadMetrik Admin</h1>
             <p className="text-gray-400">Manage leads and proposals</p>
           </div>
-          <button
-            onClick={fetchLeads}
-            className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
-          >
-            ↻ Refresh
-          </button>
+          <div className="flex gap-3">
+            <a
+              href="/admin/settings"
+              className="px-4 py-2 bg-orange-500 hover:bg-orange-600 rounded-lg transition-colors font-medium"
+            >
+              ⚙️ Add-ons
+            </a>
+            <a
+              href="/admin/templates"
+              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+            >
+              📄 Templates
+            </a>
+            <button
+              onClick={fetchLeads}
+              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+            >
+              ↻ Refresh
+            </button>
+          </div>
         </div>
 
         {error && (
