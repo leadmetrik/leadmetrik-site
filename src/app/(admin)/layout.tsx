@@ -16,8 +16,8 @@ export default async function AdminLayout({
   return (
     <div className="min-h-screen bg-[#0F1419]">
       <AdminSidebar />
-      {/* Main content - account for right sidebar on desktop, top header on mobile */}
-      <main className="lg:mr-72 pt-16 lg:pt-0">
+      {/* Main content - account for left sidebar on desktop, top header on mobile */}
+      <main className="lg:ml-72 pt-16 lg:pt-0">
         <div className="p-6 lg:p-8">
           {children}
         </div>

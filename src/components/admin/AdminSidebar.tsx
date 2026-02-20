@@ -46,7 +46,7 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-gray-800">
         <Link href="/admin">
-          <Image src="/logo-white.png" alt="Lead Metrik" width={180} height={55} className="mx-auto" />
+          <Image src="/logo-white.jpg" alt="Lead Metrik" width={180} height={55} className="mx-auto" />
         </Link>
       </div>
 
@@ -101,7 +101,7 @@ export default function AdminSidebar() {
     <>
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#1A202C] border-b border-gray-800 flex items-center justify-between px-4 z-50">
-        <Image src="/logo-white.png" alt="Lead Metrik" width={140} height={45} />
+        <Image src="/logo-white.jpg" alt="Lead Metrik" width={140} height={45} />
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="p-2 text-gray-400 hover:text-white"
@@ -120,8 +120,8 @@ export default function AdminSidebar() {
 
       {/* Mobile Sidebar */}
       <aside
-        className={`lg:hidden fixed top-16 right-0 bottom-0 w-72 bg-[#1A202C] z-50 transform transition-transform duration-300 ${
-          mobileOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`lg:hidden fixed top-16 left-0 bottom-0 w-72 bg-[#1A202C] z-50 transform transition-transform duration-300 ${
+          mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full pt-4">
@@ -129,8 +129,8 @@ export default function AdminSidebar() {
         </div>
       </aside>
 
-      {/* Desktop Sidebar (Right side) */}
-      <aside className="hidden lg:flex fixed top-0 right-0 bottom-0 w-72 bg-[#1A202C] border-l border-gray-800 flex-col z-40">
+      {/* Desktop Sidebar (Left side) */}
+      <aside className="hidden lg:flex fixed top-0 left-0 bottom-0 w-72 bg-[#1A202C] border-r border-gray-800 flex-col z-40">
         <NavContent />
       </aside>
     </>
