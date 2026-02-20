@@ -356,8 +356,8 @@ function BeforeAfterSlider() {
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img 
-          src="/2026-02-20-leadmetrik-after-hero-v2.png"
-          alt="Modern professional website"
+          src="/2026-02-20-leadmetrik-after-local-v3.png"
+          alt="Modern local business website"
           className="w-full h-full object-cover object-top"
         />
         <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
