@@ -495,6 +495,86 @@ function ProcessTimeline() {
   );
 }
 
+// Custom Slider Component
+function CustomSlider({ 
+  value, 
+  onChange, 
+  min, 
+  max, 
+  step,
+  label,
+  icon: Icon,
+  format = (v: number) => v.toLocaleString(),
+  suffix = ''
+}: {
+  value: number;
+  onChange: (v: number) => void;
+  min: number;
+  max: number;
+  step: number;
+  label: string;
+  icon: React.ElementType;
+  format?: (v: number) => string;
+  suffix?: string;
+}) {
+  const percentage = ((value - min) / (max - min)) * 100;
+  
+  return (
+    <div className="group">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-brand-orange/20 flex items-center justify-center">
+            <Icon className="w-4 h-4 text-brand-orange" />
+          </div>
+          <label className="text-gray-300 font-medium">{label}</label>
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            value={value}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              if (v >= min && v <= max) onChange(v);
+            }}
+            className="w-24 bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-1.5 text-right text-white font-bold focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+          />
+          {suffix && <span className="text-gray-400 font-medium">{suffix}</span>}
+        </div>
+      </div>
+      
+      {/* Custom slider track */}
+      <div className="relative h-3 bg-gray-700 rounded-full overflow-hidden cursor-pointer group-hover:bg-gray-600 transition-colors">
+        {/* Fill */}
+        <div 
+          className="absolute left-0 top-0 h-full bg-gradient-to-r from-brand-orange to-yellow-500 rounded-full transition-all duration-150"
+          style={{ width: `${percentage}%` }}
+        />
+        {/* Native range input (invisible but functional) */}
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        />
+        {/* Thumb indicator */}
+        <div 
+          className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-brand-orange transition-all duration-150 group-hover:scale-110"
+          style={{ left: `calc(${percentage}% - 10px)` }}
+        />
+      </div>
+      
+      {/* Min/Max labels */}
+      <div className="flex justify-between mt-1.5 text-xs text-gray-500">
+        <span>{format(min)}{suffix}</span>
+        <span>{format(max)}{suffix}</span>
+      </div>
+    </div>
+  );
+}
+
 // ROI Calculator Component  
 function ROICalculator() {
   const [visitors, setVisitors] = useState(1000);
@@ -517,62 +597,48 @@ function ROICalculator() {
       <div className="grid md:grid-cols-2 gap-8">
         {/* Inputs */}
         <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
-          <h3 className="text-xl font-bold text-white mb-6">Your Current Numbers</h3>
+          <div className="flex items-center gap-3 mb-2">
+            <h3 className="text-xl font-bold text-white">Your Current Numbers</h3>
+          </div>
+          <p className="text-gray-400 text-sm mb-6">
+            👆 Drag the sliders or type to adjust
+          </p>
           
-          <div className="space-y-6">
-            <div>
-              <label className="block text-gray-400 mb-2">
-                Monthly Website Visitors
-              </label>
-              <input
-                type="range"
-                min="100"
-                max="10000"
-                step="100"
-                value={visitors}
-                onChange={(e) => setVisitors(Number(e.target.value))}
-                className="w-full accent-yellow-500"
-              />
-              <div className="text-2xl font-bold text-white mt-1">
-                {visitors.toLocaleString()} visitors
-              </div>
-            </div>
+          <div className="space-y-8">
+            <CustomSlider
+              value={visitors}
+              onChange={setVisitors}
+              min={100}
+              max={10000}
+              step={100}
+              label="Monthly Visitors"
+              icon={TrendingUp}
+              suffix=""
+            />
             
-            <div>
-              <label className="block text-gray-400 mb-2">
-                Current Conversion Rate
-              </label>
-              <input
-                type="range"
-                min="0.5"
-                max="5"
-                step="0.5"
-                value={conversionRate}
-                onChange={(e) => setConversionRate(Number(e.target.value))}
-                className="w-full accent-yellow-500"
-              />
-              <div className="text-2xl font-bold text-white mt-1">
-                {conversionRate}%
-              </div>
-            </div>
+            <CustomSlider
+              value={conversionRate}
+              onChange={setConversionRate}
+              min={0.5}
+              max={5}
+              step={0.5}
+              label="Conversion Rate"
+              icon={TrendingDown}
+              format={(v) => v.toString()}
+              suffix="%"
+            />
             
-            <div>
-              <label className="block text-gray-400 mb-2">
-                Average Customer Value
-              </label>
-              <input
-                type="range"
-                min="100"
-                max="5000"
-                step="100"
-                value={avgValue}
-                onChange={(e) => setAvgValue(Number(e.target.value))}
-                className="w-full accent-yellow-500"
-              />
-              <div className="text-2xl font-bold text-white mt-1">
-                ${avgValue.toLocaleString()}
-              </div>
-            </div>
+            <CustomSlider
+              value={avgValue}
+              onChange={setAvgValue}
+              min={100}
+              max={5000}
+              step={100}
+              label="Avg Customer Value"
+              icon={Briefcase}
+              format={(v) => `$${v.toLocaleString()}`}
+              suffix=""
+            />
           </div>
         </div>
         
@@ -580,7 +646,7 @@ function ROICalculator() {
         <div className="space-y-4">
           {/* Current state */}
           <div className="bg-red-900/30 rounded-2xl p-6 border border-red-800/50">
-            <div className="text-red-400 text-sm font-semibold mb-2">YOUR CURRENT WEBSITE</div>
+            <div className="text-red-400 text-sm font-semibold mb-3">YOUR CURRENT WEBSITE</div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Monthly leads:</span>
               <span className="text-2xl font-bold text-white">{currentLeads}</span>
@@ -593,7 +659,7 @@ function ROICalculator() {
           
           {/* New state */}
           <div className="bg-green-900/30 rounded-2xl p-6 border border-green-800/50">
-            <div className="text-green-400 text-sm font-semibold mb-2">WITH A LEADMETRIK WEBSITE</div>
+            <div className="text-green-400 text-sm font-semibold mb-3">WITH A LEADMETRIK WEBSITE</div>
             <div className="flex justify-between items-center">
               <span className="text-gray-400">Monthly leads:</span>
               <span className="text-2xl font-bold text-white">{newLeads}</span>
@@ -606,17 +672,21 @@ function ROICalculator() {
           
           {/* The difference */}
           <motion.div 
-            className="bg-gradient-to-r from-brand-orange to-brand-orange-dark rounded-2xl p-6"
-            initial={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-brand-orange to-yellow-500 rounded-2xl p-6 relative overflow-hidden"
+            initial={{ scale: 0.98 }}
             animate={{ scale: 1 }}
             transition={{ repeat: Infinity, repeatType: "reverse", duration: 2 }}
           >
-            <div className="text-yellow-100 text-sm font-semibold mb-2">YOU'RE LEAVING ON THE TABLE</div>
-            <div className="text-4xl font-bold text-white">
-              ${monthlyGain.toLocaleString()}/mo
-            </div>
-            <div className="text-yellow-100 mt-1">
-              That's <strong>${yearlyGain.toLocaleString()}</strong> per year
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-pulse" />
+            <div className="relative">
+              <div className="text-yellow-100 text-sm font-semibold mb-2">YOU'RE LEAVING ON THE TABLE</div>
+              <div className="text-4xl font-bold text-white">
+                ${monthlyGain.toLocaleString()}/mo
+              </div>
+              <div className="text-yellow-100 mt-1">
+                That's <strong>${yearlyGain.toLocaleString()}</strong> per year
+              </div>
             </div>
           </motion.div>
         </div>
