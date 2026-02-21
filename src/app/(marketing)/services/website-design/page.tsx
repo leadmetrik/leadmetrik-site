@@ -495,7 +495,7 @@ function ProcessTimeline() {
   );
 }
 
-// Custom Slider Component
+// Custom Slider Component with inline styles for cross-browser support
 function CustomSlider({ 
   value, 
   onChange, 
@@ -519,8 +519,58 @@ function CustomSlider({
 }) {
   const percentage = ((value - min) / (max - min)) * 100;
   
+  // Slider styles injected via style tag
+  const sliderId = `slider-${label.replace(/\s/g, '-').toLowerCase()}`;
+  
   return (
     <div className="group">
+      <style>{`
+        #${sliderId} {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 12px;
+          background: linear-gradient(to right, #F5A623 0%, #F5A623 ${percentage}%, #374151 ${percentage}%, #374151 100%);
+          border-radius: 9999px;
+          outline: none;
+          cursor: pointer;
+        }
+        #${sliderId}::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 28px;
+          height: 28px;
+          background: white;
+          border: 3px solid #F5A623;
+          border-radius: 50%;
+          cursor: grab;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          transition: transform 0.15s, box-shadow 0.15s;
+        }
+        #${sliderId}::-webkit-slider-thumb:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        #${sliderId}::-webkit-slider-thumb:active {
+          cursor: grabbing;
+          transform: scale(1.15);
+        }
+        #${sliderId}::-moz-range-thumb {
+          width: 28px;
+          height: 28px;
+          background: white;
+          border: 3px solid #F5A623;
+          border-radius: 50%;
+          cursor: grab;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        #${sliderId}::-moz-range-track {
+          height: 12px;
+          background: linear-gradient(to right, #F5A623 0%, #F5A623 ${percentage}%, #374151 ${percentage}%, #374151 100%);
+          border-radius: 9999px;
+        }
+      `}</style>
+      
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-brand-orange/20 flex items-center justify-center">
@@ -536,38 +586,25 @@ function CustomSlider({
               const v = Number(e.target.value);
               if (v >= min && v <= max) onChange(v);
             }}
-            className="w-24 bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-1.5 text-right text-white font-bold focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange"
+            className="w-24 bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-1.5 text-right text-white font-bold focus:border-brand-orange focus:outline-none focus:ring-1 focus:ring-brand-orange [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
           {suffix && <span className="text-gray-400 font-medium">{suffix}</span>}
         </div>
       </div>
       
-      {/* Custom slider track */}
-      <div className="relative h-3 bg-gray-700 rounded-full overflow-hidden cursor-pointer group-hover:bg-gray-600 transition-colors">
-        {/* Fill */}
-        <div 
-          className="absolute left-0 top-0 h-full bg-gradient-to-r from-brand-orange to-yellow-500 rounded-full transition-all duration-150"
-          style={{ width: `${percentage}%` }}
-        />
-        {/* Native range input (invisible but functional) */}
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-        />
-        {/* Thumb indicator */}
-        <div 
-          className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-brand-orange transition-all duration-150 group-hover:scale-110"
-          style={{ left: `calc(${percentage}% - 10px)` }}
-        />
-      </div>
+      {/* Native styled range input */}
+      <input
+        id={sliderId}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
       
       {/* Min/Max labels */}
-      <div className="flex justify-between mt-1.5 text-xs text-gray-500">
+      <div className="flex justify-between mt-2 text-xs text-gray-500">
         <span>{format(min)}{suffix}</span>
         <span>{format(max)}{suffix}</span>
       </div>
