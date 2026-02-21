@@ -345,7 +345,7 @@ function BeforeAfterSlider() {
             Last updated: 2015 | Visitor counter: 000234
           </div>
         </div>
-        <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+        <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
           BEFORE
         </div>
       </div>
