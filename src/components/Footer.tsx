@@ -8,7 +8,7 @@ const navigation = {
     { name: 'Local SEO', href: '/services/local-seo' },
     { name: 'Google Ads', href: '/services/google-ads' },
     { name: 'Website Design', href: '/services/website-design' },
-    { name: 'Social Media', href: '/services/social-media-marketing' },
+    { name: 'Social Media', href: '/services/social-media' },
     { name: 'Reputation Management', href: '/services/reputation-management' },
   ],
   industries: [
