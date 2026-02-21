@@ -79,6 +79,12 @@ const painPoints = [
     description: "Before/after photos and patient testimonials are your best marketing assets — but nobody sees them because your social media is dead.",
     stat: '72% of patients check social media before booking',
   },
+  {
+    icon: '🌐',
+    title: 'Outdated Website That Kills Conversions',
+    description: "Your website looks like it was built in 2015. Patients land on it and immediately click back to find a more modern, trustworthy practice.",
+    stat: '94% of first impressions are design-related',
+  },
 ]
 
 // Practice types with tailored content
