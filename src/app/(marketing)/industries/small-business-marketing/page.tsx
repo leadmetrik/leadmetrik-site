@@ -285,11 +285,22 @@ const faqs = [
   },
 ]
 
+// Live results notifications for hero
+const liveResults = [
+  { icon: '⭐', title: 'New 5-Star Review', business: "Tony's Pizzeria", detail: 'Google Maps', time: '2 min ago', color: 'text-yellow-400' },
+  { icon: '📈', title: 'Ranking Improved', business: 'Elite Auto Repair', detail: '"mechanic near me" → #3', time: '5 min ago', color: 'text-green-400' },
+  { icon: '📞', title: 'New Customer Call', business: 'Bella Salon & Spa', detail: 'From Google Search', time: '8 min ago', color: 'text-blue-400' },
+  { icon: '👥', title: 'Website Visitor', business: 'Henderson Pet Care', detail: '+47 visitors today', time: '12 min ago', color: 'text-purple-400' },
+  { icon: '💬', title: 'Review Response Sent', business: 'Desert Fitness Gym', detail: 'Auto-replied in 2 hrs', time: '15 min ago', color: 'text-brand-orange' },
+  { icon: '🎯', title: 'Lead Captured', business: 'Martinez Law Firm', detail: 'Contact form submission', time: '18 min ago', color: 'text-cyan-400' },
+]
+
 export default function SmallBusinessMarketing() {
   const [activeTab, setActiveTab] = useState('restaurants')
   const [openAccordion, setOpenAccordion] = useState<number | null>(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [currentBusiness, setCurrentBusiness] = useState(0)
+  const [currentResult, setCurrentResult] = useState(0)
 
   const heroRef = useRef(null)
   const statsRef = useRef(null)
@@ -312,6 +323,14 @@ export default function SmallBusinessMarketing() {
     const interval = setInterval(() => {
       setCurrentBusiness((prev) => (prev + 1) % businessTypes.length)
     }, 2500)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Rotate live results notifications
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentResult((prev) => (prev + 1) % liveResults.length)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
 
@@ -394,92 +413,181 @@ export default function SmallBusinessMarketing() {
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left: Content */}
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                    <span className="text-xl">🏪</span>
+                    Small Business Marketing Las Vegas
+                  </span>
+                </motion.div>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+                >
+                  Big Results.{' '}
+                  <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
+                    Small Business Budget.
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-xl text-gray-400 mb-8"
+                >
+                  Compete with big chains without the corporate marketing team. 
+                  We help Las Vegas small businesses get found, get chosen, and get more customers.
+                </motion.p>
+
+                {/* Rotating business type */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="mb-8"
+                >
+                  <div className="inline-flex items-center gap-3 bg-brand-charcoal/50 border border-gray-700 rounded-2xl px-6 py-4">
+                    <span className="text-gray-400 text-sm">Marketing for your</span>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentBusiness}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="text-2xl">{businessTypes[currentBusiness].icon}</span>
+                        <span className="text-white font-semibold text-lg">
+                          {businessTypes[currentBusiness].name}
+                        </span>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+
+                {/* CTA buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
+                  <Link
+                    href="#contact"
+                    className="group relative inline-flex items-center justify-center gap-2 bg-brand-orange hover:bg-brand-orange-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all overflow-hidden"
+                  >
+                    <span className="relative z-10">Get Your Free Audit</span>
+                    <svg className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-orange-dark to-brand-orange opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                  <Link
+                    href="tel:+17029964415"
+                    className="inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-brand-orange/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all"
+                  >
+                    <svg className="w-5 h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    (702) 996-4415
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Right: Live Results Card */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={heroInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="hidden lg:block"
               >
-                <span className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                  <span className="text-xl">🏪</span>
-                  Small Business Marketing Las Vegas
-                </span>
-              </motion.div>
+                <div className="bg-brand-charcoal/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 shadow-2xl">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-white font-semibold">Live Client Results</h3>
+                    <span className="flex items-center gap-2 text-green-400 text-sm">
+                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                      Real-time
+                    </span>
+                  </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
-              >
-                Big Results.{' '}
-                <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
-                  Small Business Budget.
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-xl text-gray-400 mb-8 max-w-2xl"
-              >
-                Compete with big chains without the corporate marketing team. 
-                We help Las Vegas small businesses get found, get chosen, and get more customers.
-              </motion.p>
-
-              {/* Rotating business type */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mb-8"
-              >
-                <div className="inline-flex items-center gap-3 bg-brand-charcoal/50 border border-gray-700 rounded-2xl px-6 py-4">
-                  <span className="text-gray-400 text-sm">Marketing for your</span>
+                  {/* Current notification */}
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={currentBusiness}
-                      initial={{ opacity: 0, y: 10 }}
+                      key={currentResult}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center gap-2"
+                      exit={{ opacity: 0, y: -20 }}
+                      className="bg-brand-orange/10 border border-brand-orange/30 rounded-xl p-4 mb-4"
                     >
-                      <span className="text-2xl">{businessTypes[currentBusiness].icon}</span>
-                      <span className="text-white font-semibold text-lg">
-                        {businessTypes[currentBusiness].name}
-                      </span>
+                      <div className="flex items-start gap-3">
+                        <span className={`text-2xl ${liveResults[currentResult].color}`}>
+                          {liveResults[currentResult].icon}
+                        </span>
+                        <div className="flex-1">
+                          <div className="font-semibold text-white">
+                            {liveResults[currentResult].title}
+                          </div>
+                          <div className="text-sm text-brand-orange">
+                            {liveResults[currentResult].business}
+                          </div>
+                          <div className="text-xs text-gray-400 mt-1">
+                            {liveResults[currentResult].detail}
+                          </div>
+                        </div>
+                        <span className="text-xs text-gray-500">
+                          {liveResults[currentResult].time}
+                        </span>
+                      </div>
                     </motion.div>
                   </AnimatePresence>
-                </div>
-              </motion.div>
 
-              {/* CTA buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Link
-                  href="#contact"
-                  className="group relative inline-flex items-center justify-center gap-2 bg-brand-orange hover:bg-brand-orange-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all overflow-hidden"
-                >
-                  <span className="relative z-10">Get Your Free Audit</span>
-                  <svg className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                  <div className="absolute inset-0 bg-gradient-to-r from-brand-orange-dark to-brand-orange opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-                <Link
-                  href="tel:+17029964415"
-                  className="inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-brand-orange/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all"
-                >
-                  <svg className="w-5 h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  (702) 996-4415
-                </Link>
+                  {/* Recent results list */}
+                  <div className="space-y-3">
+                    {liveResults.slice(0, 4).map((result, index) => (
+                      <motion.div
+                        key={result.business}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: index === currentResult ? 0.3 : 0.7 }}
+                        className={`flex items-center gap-3 p-2 rounded-lg transition-all ${
+                          index === currentResult ? 'bg-brand-orange/5' : ''
+                        }`}
+                      >
+                        <span className={`text-lg ${result.color}`}>{result.icon}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-gray-300 truncate">{result.business}</div>
+                          <div className="text-xs text-gray-500">{result.title}</div>
+                        </div>
+                        <span className="text-xs text-gray-600">{result.time}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Stats row */}
+                  <div className="mt-6 pt-4 border-t border-gray-800 grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <div className="text-xl font-bold text-brand-orange">150+</div>
+                      <div className="text-xs text-gray-500">Clients</div>
+                    </div>
+                    <div>
+                      <div className="text-xl font-bold text-green-400">4.9★</div>
+                      <div className="text-xs text-gray-500">Avg Rating</div>
+                    </div>
+                    <div>
+                      <div className="text-xl font-bold text-blue-400">3x</div>
+                      <div className="text-xs text-gray-500">More Leads</div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
